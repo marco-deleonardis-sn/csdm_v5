@@ -1,10 +1,3 @@
-content to the widget CSS field
-  2. Move <script> content to the widget Client Script (api.controller)
-  3. Replace document.getElementById() with angular.element() or $scope refs
-  4. Move data arrays (ENT, ROLES, DOM_CFG) to a Script Include for reuse
-  5. HTML template goes in the widget HTML field; use sp-* components where applicable
-  6. Replace localStorage theme persistence with $rootScope or spUtil
--->
 <style>
 /* ── FONTS ─────────────────────────────────────────── */
 @font-face{font-family:'ServiceNow Sans';src:url('https://www.servicenow.com/etc.clientlibs/ds/clientlibs/clientlib-arc-commons/resources/fonts/ServiceNowSans-Light.woff2') format('woff2');font-weight:300;font-display:swap}
