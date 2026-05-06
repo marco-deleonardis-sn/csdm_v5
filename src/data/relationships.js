@@ -1,0 +1,91 @@
+export const REL_ENTS = [
+  { id:'bcap', nm:'Business Capability',      dom:'Design & Planning',  tbl:'cmdb_ci_business_capability',         dc:'var(--cd)',
+    rels:[
+      { fr:'Business Capability',  rel:'Provided by',       to:'Business Application', dir:'out', note:'Strategic relationship' },
+      { fr:'Business Capability',  rel:'Provided by',       to:'Business Service',     dir:'out', note:'Provides relationship' },
+      { fr:'Business Capability',  rel:'Maps to',           to:'Value Stream Stage',   dir:'out', note:'m2m — CSDM 5' },
+      { fr:'Business Capability',  rel:'Parent of',         to:'Business Capability',  dir:'out', note:'Hierarchy — up to 6 levels' },
+    ]},
+  { id:'bapp', nm:'Business Application',     dom:'Design & Planning',  tbl:'cmdb_ci_business_app',                dc:'var(--cd)',
+    rels:[
+      { fr:'Business Capability',  rel:'Provided by',       to:'Business Application', dir:'in',  note:'Strategic relationship' },
+      { fr:'Business Application', rel:'Contains',          to:'Business Application', dir:'out', note:'Platform Host/App pattern' },
+      { fr:'Business Application', rel:'Contains',          to:'SDLC Component',       dir:'out', note:'Optional — Build domain' },
+      { fr:'Business Application', rel:'Uses',              to:'Information Object',   dir:'out', note:'Data governance — PII/PCI/HIPAA' },
+      { fr:'Business Application', rel:'Consumes',          to:'Service Instance',     dir:'out', note:'Reference attribute' },
+    ]},
+  { id:'iobj', nm:'Information Object',       dom:'Design & Planning',  tbl:'cmdb_ci_information_object',          dc:'var(--cd)',
+    rels:[
+      { fr:'Business Application', rel:'Uses',              to:'Information Object',   dir:'in',  note:'Data governance, sensitivity scoping' },
+      { fr:'Information Object',   rel:'Used by',           to:'Business Application', dir:'out', note:'A single IO referenced by multiple BAs' },
+    ]},
+  { id:'sdlc', nm:'SDLC Component',           dom:'Build & Integration', tbl:'cmdb_ci_sdlc_component',             dc:'var(--cb)',
+    rels:[
+      { fr:'Business Application', rel:'Contains',          to:'SDLC Component',       dir:'in',  note:'Optional' },
+      { fr:'SDLC Component',       rel:'Consumes',          to:'Service Instance',     dir:'out', note:'Deployed instance link' },
+    ]},
+  { id:'tms',  nm:'Tech Mgmt Service',        dom:'Service Delivery',   tbl:'cmdb_ci_service_technical',           dc:'var(--cde)',
+    rels:[
+      { fr:'Tech Mgmt Svc Offering',rel:'References',       to:'Tech Mgmt Service',    dir:'in',  note:'Reference attribute on offering' },
+      { fr:'Service Portfolio',     rel:'References',       to:'Tech Mgmt Service',    dir:'in',  note:'Available since Rome' },
+      { fr:'Tech Mgmt Service',     rel:'Contains',         to:'Tech Mgmt Svc Offering',dir:'out',note:'TMS has one or more TMSOs' },
+    ]},
+  { id:'tmo',  nm:'Tech Mgmt Svc Offering',   dom:'Service Delivery',   tbl:'service_offering (Technical)',        dc:'var(--cde)',
+    rels:[
+      { fr:'Tech Mgmt Svc Offering',rel:'References',       to:'Tech Mgmt Service',    dir:'out', note:'Belongs to one TMS' },
+      { fr:'Tech Mgmt Svc Offering',rel:'Contains',         to:'Service Instance',     dir:'out', note:'Service Mapping creates this' },
+      { fr:'Tech Mgmt Svc Offering',rel:'Contains',         to:'Dynamic CI Group',     dir:'out', note:'Query-based CI grouping' },
+    ]},
+  { id:'si',   nm:'Service Instance',         dom:'Service Delivery',   tbl:'cmdb_ci_service_auto',                dc:'var(--cde)',
+    rels:[
+      { fr:'Tech Mgmt Svc Offering',rel:'Contains',         to:'Service Instance',     dir:'in',  note:'Service Mapping (auto) or manual' },
+      { fr:'Business Application', rel:'Consumes',          to:'Service Instance',     dir:'in',  note:'Reference attribute on BA' },
+      { fr:'SDLC Component',       rel:'Consumes',          to:'Service Instance',     dir:'in',  note:'Optional — Build domain' },
+      { fr:'Service Instance',     rel:'Depends on',        to:'Service Instance',     dir:'out', note:'Platform Host/App pattern' },
+      { fr:'Service Instance',     rel:'Depends on',        to:'Application (CI)',     dir:'out', note:'Operational CI dependency' },
+      { fr:'Bus Svc Offering',     rel:'Depends on',        to:'Service Instance',     dir:'in',  note:'Reference attribute on BSO' },
+    ]},
+  { id:'dcig', nm:'Dynamic CI Group',         dom:'Service Delivery',   tbl:'cmdb_ci_query_based_service',         dc:'var(--cde)',
+    rels:[
+      { fr:'Tech Mgmt Svc Offering',rel:'Contains',         to:'Dynamic CI Group',     dir:'in',  note:'TMSO Contains one or more DCIGs' },
+      { fr:'Dynamic CI Group',     rel:'Uses related list', to:'Infrastructure CIs',   dir:'out', note:'CMDB Group query identifies CIs' },
+    ]},
+  { id:'bs',   nm:'Business Service',         dom:'Service Consumption', tbl:'cmdb_ci_service_business',           dc:'var(--cc)',
+    rels:[
+      { fr:'Business Capability',  rel:'Provided by',       to:'Business Service',     dir:'in',  note:'Strategic — capability → service' },
+      { fr:'Service Portfolio',    rel:'References',        to:'Business Service',     dir:'in',  note:'Reference attribute on portfolio' },
+      { fr:'Business Service',     rel:'Contains',          to:'Bus Svc Offering',     dir:'out', note:'One or more BSOs per Business Service' },
+    ]},
+  { id:'bso',  nm:'Business Svc Offering',    dom:'Service Consumption', tbl:'service_offering (Business)',        dc:'var(--cc)',
+    rels:[
+      { fr:'Business Service',     rel:'Contains',          to:'Bus Svc Offering',     dir:'in',  note:'BSO is a stratification of Business Service' },
+      { fr:'Bus Svc Offering',     rel:'Depends on',        to:'Service Instance',     dir:'out', note:'Reference attribute' },
+      { fr:'Sold Product (CSM)',   rel:'References',        to:'Bus Svc Offering',     dir:'in',  note:'CSM integration' },
+    ]},
+  { id:'sport',nm:'Service Portfolio',        dom:'Service Consumption', tbl:'service_portfolio (not a CI)',       dc:'var(--cc)',
+    rels:[
+      { fr:'Service Portfolio',    rel:'References',        to:'Business Service',     dir:'out', note:'Hierarchical grouping of services' },
+      { fr:'Service Portfolio',    rel:'References',        to:'Tech Mgmt Service',    dir:'out', note:'Since Rome release' },
+    ]},
+  { id:'vs',   nm:'Value Stream',             dom:'Foundation',         tbl:'cmn_value_stream',                    dc:'var(--cf)',
+    rels:[
+      { fr:'Value Stream Stage',   rel:'Maps to',           to:'Business Capability',  dir:'out', note:'m2m — new in CSDM 5' },
+      { fr:'Value Stream Stage',   rel:'Maps to',           to:'Business Process',     dir:'out', note:'m2m — new in CSDM 5' },
+      { fr:'Value Stream',         rel:'Contains',          to:'Value Stream Stage',   dir:'out', note:'16 OOB value stream categories' },
+    ]},
+]
+
+export const REL_PILL_STYLES = {
+  'Contains':         'background:rgba(74,222,128,.1);color:var(--ok);border-color:rgba(74,222,128,.28)',
+  'Depends on':       'background:rgba(251,191,36,.1);color:var(--warn);border-color:rgba(251,191,36,.28)',
+  'References':       'background:rgba(82,184,255,.1);color:var(--blue);border-color:rgba(82,184,255,.28)',
+  'Consumes':         'background:rgba(82,184,255,.1);color:var(--blue);border-color:rgba(82,184,255,.28)',
+  'Provided by':      'background:rgba(74,222,128,.1);color:var(--ok);border-color:rgba(74,222,128,.28)',
+  'Provides':         'background:rgba(74,222,128,.1);color:var(--ok);border-color:rgba(74,222,128,.28)',
+  'Maps to':          'background:rgba(118,97,255,.1);color:var(--indigo);border-color:rgba(118,97,255,.28)',
+  'Uses':             'background:rgba(82,184,255,.1);color:var(--blue);border-color:rgba(82,184,255,.28)',
+  'Uses related list':'background:rgba(82,184,255,.1);color:var(--blue);border-color:rgba(82,184,255,.28)',
+  'Parent of':        'background:rgba(255,255,255,.06);color:var(--text-m);border-color:var(--bord)',
+  'Contained by':     'background:rgba(255,255,255,.06);color:var(--text-m);border-color:var(--bord)',
+  'Used by':          'background:rgba(255,255,255,.06);color:var(--text-m);border-color:var(--bord)',
+}
