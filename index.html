@@ -122,7 +122,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 [data-theme="a11y"] .hero-grd{display:none}
 .hero-in{position:relative;z-index:1}
 .eyebrow{font-family:var(--mono);font-size:var(--fs-label);font-weight:400;text-transform:uppercase;letter-spacing:.16em;color:var(--wg);margin-bottom:.875rem;display:flex;align-items:center;gap:8px}
-.eyebrow::before{content:'';display:block;width:28px;height:2px;background:var(--wg);animation:charge .5s ease forwards}
+.eyebrow::before{content:'';display:block;width:28px;max-width:28px;height:2px;background:var(--wg);animation:charge .5s ease forwards}
 [data-theme="light"] .eyebrow{color:var(--text-m)}
 [data-theme="light"] .eyebrow::before{background:var(--blue)}
 .h1{font-size:var(--fs-h1);font-weight:900;line-height:.92;letter-spacing:-.03em;margin-bottom:.875rem;color:var(--text)}
@@ -248,7 +248,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 
 /* Section header pattern */
 .sec-hd{display:flex;align-items:center;gap:.625rem;margin:1.5rem 0 .5rem;font-size:var(--fs-h3);font-weight:700;color:var(--text)}
-.sec-hd::before{content:'';display:block;width:18px;height:2px;background:var(--wg);flex-shrink:0;animation:charge .5s ease forwards}
+.sec-hd::before{content:'';display:block;width:18px;max-width:18px;height:2px;background:var(--wg);animation:charge .5s ease forwards}
 [data-theme="light"] .sec-hd::before{background:var(--blue)}
 .sec-lede{font-size:var(--fs-body);color:var(--text-m);font-weight:300;line-height:1.65;max-width:640px;margin-bottom:1.125rem}
 .fam-hdr{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
@@ -1530,7 +1530,7 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { clo
 // Default: Explorer on mobile, Diagram on desktop
 if (window.innerWidth < 640) sv('e');
 </script>
- 
+
 <footer style="background:var(--bg2,#053d5a);border-top:1px solid var(--bord);padding:1.5rem 20px 1.75rem;text-align:center" role="contentinfo">
   <p style="font-size:var(--fs-body);font-weight:600;color:var(--text);margin-bottom:.5rem;letter-spacing:.01em">
     Created by Marco De Leonardis &nbsp;|&nbsp; Principal Platform Architect &nbsp;|&nbsp; ServiceNow Customer Excellence Group
