@@ -6,5 +6,5 @@ import react from '@vitejs/plugin-react'
 // If it's at https://username.github.io/ (root) → base: '/'
 export default defineConfig({
   plugins: [react()],
-  base: '/csdm5/',
+  base: '/csdm_v5/',
 })
