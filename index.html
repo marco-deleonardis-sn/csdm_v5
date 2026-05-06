@@ -1530,12 +1530,17 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { clo
 // Default: Explorer on mobile, Diagram on desktop
 if (window.innerWidth < 640) sv('e');
 </script>
-<footer>
-  <div class="wrap">
-    <p>Marco De Leonardis &nbsp; | &nbsp; Principal Platform Architect &nbsp; | &nbsp; ServiceNow Customer Excellence Group</p>
-    <p>Based on CSDM 5 White Paper by Scott Lemm &amp; Rob Koeten &nbsp;·&nbsp; ServiceNow 2025</p>
-    <p>© 2026 ServiceNow, Inc. All rights reserved. &nbsp;·&nbsp; AT&amp;T Now Intelligence — Internal Brief &nbsp;·&nbsp; Confidential — ServiceNow Internal Only</p>
-  </div>
+ 
+<footer style="background:var(--bg2,#053d5a);border-top:1px solid var(--bord);padding:1.5rem 20px 1.75rem;text-align:center" role="contentinfo">
+  <p style="font-size:var(--fs-body);font-weight:600;color:var(--text);margin-bottom:.5rem;letter-spacing:.01em">
+    Created by Marco De Leonardis &nbsp;|&nbsp; Principal Platform Architect &nbsp;|&nbsp; ServiceNow Customer Excellence Group
+  </p>
+  <p style="font-family:var(--mono);font-size:var(--fs-label);color:var(--text-m);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem">
+    Based on CSDM 5 White Paper by Scott Lemm &amp; Rob Koeten &nbsp;&middot;&nbsp; ServiceNow 2025
+  </p>
+  <p style="font-size:var(--fs-label);color:var(--text-f);line-height:1.6;max-width:72rem;margin:0 auto">
+    &copy; 2026 ServiceNow, Inc. ServiceNow, the ServiceNow logo, Now, ServiceNow AI Platform, and other ServiceNow marks are trademarks and/or registered trademarks of ServiceNow, Inc. in the United States and/or other countries. Other company and product names may be trademarks of the respective companies with which they are associated.
+  </p>
 </footer>
 </body>
 </html>
