@@ -184,9 +184,40 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .z-foundation .ents{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:5px}
 .ec{display:inline-flex;align-items:center;gap:4px;padding:0 10px;min-height:44px;border-radius:8px;border:1px solid;font-family:var(--font);font-size:var(--fs-body);font-weight:600;cursor:pointer;white-space:nowrap;overflow:hidden;transition:background .14s,border-color .14s,transform .12s,box-shadow .14s}
 .ec:hover{transform:translateY(-1px)}
-.ec.dim{opacity:.09;pointer-events:none;transform:none}
+.ec.dim{opacity:.22;pointer-events:none;transform:none}
 .dot-n{width:6px;height:6px;border-radius:50%;background:var(--wg);flex-shrink:0}
 .dot-r{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0}
+
+/* ── ACCESSIBLE CHIP TEXT COLORS (WCAG AA per theme) ── */
+/* Dark mode: bright tints that clear 4.5:1 on #032D42 */
+:root{
+  --cc-build:#F47A7A;--cc-design:#5AACE8;--cc-ideation:#F0B429;
+  --cc-delivery:#E8883C;--cc-consumption:#72C748;--cc-foundation:#AAAAAA;--cc-portfolio:#B0C4D4
+}
+/* Light mode: dark saturated tints on light chip backgrounds */
+[data-theme="light"]{
+  --cc-build:#8B1A1A;--cc-design:#1A5E8A;--cc-ideation:#7A5A00;
+  --cc-delivery:#8B4A0A;--cc-consumption:#2A5A0A;--cc-foundation:#555;--cc-portfolio:#4A6080
+}
+/* A11y: always white text, border provides color identity */
+[data-theme="a11y"]{
+  --cc-build:#fff;--cc-design:#fff;--cc-ideation:#fff;
+  --cc-delivery:#fff;--cc-consumption:#fff;--cc-foundation:#fff;--cc-portfolio:#fff
+}
+/* A11y entity chip overrides — white text on transparent, colored 2px border */
+[data-theme="a11y"] .ec{
+  color:#fff!important;background:transparent!important;border-width:2px!important
+}
+[data-theme="a11y"] .ec:hover,[data-theme="a11y"] .ec:focus{
+  background:rgba(255,255,255,.12)!important;color:#fff!important
+}
+/* A11y persona badge overrides */
+[data-theme="a11y"] .prb{
+  color:#fff!important;background:transparent!important;border-width:2px!important
+}
+[data-theme="a11y"] .prb:hover{background:rgba(255,255,255,.1)!important}
+/* Zone dim: 22% visible is readable without losing the filter effect */
+[data-theme="a11y"] .zone.dim,.zone.dim{opacity:.22!important;pointer-events:none}
 
 /* Inner boxes */
 .inner-box{border:1px dashed var(--bord-s);border-radius:8px;padding:6px 8px;margin-bottom:7px}
@@ -552,6 +583,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 </div>
 
 <!-- EXPLORER VIEW -->
+<!-- Compact context strip shown only in Explorer mode -->
+<div id="exp-ctx" style="display:none;background:var(--hd-bg);border-bottom:1px solid var(--bord);padding:10px 20px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)" aria-label="Page context">
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <span style="font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;letter-spacing:-.03em;color:var(--text)">CSDM <em style="font-style:normal;color:var(--wg)">5</em></span>
+    <span style="font-family:var(--mono);font-size:var(--fs-label);color:var(--text-m);white-space:nowrap">Common Service Data Model</span>
+    <span style="font-family:var(--mono);font-size:var(--fs-label);color:var(--text-f);margin-left:auto;white-space:nowrap">7 Domains · 35+ Entities · 8 New in v5</span>
+  </div>
+</div>
 <div id="v-explorer" style="display:none" role="region" aria-label="CSDM 5 Explorer">
   <nav class="tnav" aria-label="Explorer tabs"><div class="tnav-inner" id="exp-tabs" role="tablist"></div></nav>
   <div class="exp-wrap">
@@ -947,8 +986,8 @@ ENT.forEach(function(e) {
   chip.setAttribute('role', 'button');
   chip.setAttribute('aria-label', e.lbl + (e.isNew ? ' — New in CSDM 5' : '') + (e.isRenamed ? ' — Renamed in CSDM 5' : '') + '. ' + d.l + ' domain. Click for details.');
   chip.style.background = rgba(d.c, 0.13);
-  chip.style.borderColor = rgba(d.c, 0.35);
-  chip.style.color = d.c;
+  chip.style.borderColor = rgba(d.c, 0.38);
+  chip.style.color = 'var(--cc-' + e.dm + ')';
 
   var inner = '';
   if (e.isNew) inner += '<span class="dot-n" aria-hidden="true" title="New in CSDM 5"></span>';
@@ -959,9 +998,11 @@ ENT.forEach(function(e) {
   function chipHover(on) {
     if (chip === selChip) return;
     chip.style.background = rgba(d.c, on ? 0.26 : 0.13);
-    chip.style.borderColor = rgba(d.c, on ? 0.7 : 0.35);
-    chip.style.color = on ? (isLight() ? d.c : '#fff') : d.c;
-    chip.style.boxShadow = on ? '0 2px 12px ' + rgba(d.c, 0.28) : '';
+    chip.style.borderColor = rgba(d.c, on ? 0.72 : 0.38);
+    /* hover text: dark themes → white; light → dark; a11y → always white */
+    var lt = document.documentElement.getAttribute('data-theme') === 'light';
+    chip.style.color = on ? (lt ? '#0F1E28' : '#fff') : 'var(--cc-' + e.dm + ')';
+    chip.style.boxShadow = on ? '0 2px 14px ' + rgba(d.c, 0.3) : '';
   }
   chip.addEventListener('mouseenter', function(){ chipHover(true); });
   chip.addEventListener('mouseleave', function(){ chipHover(false); });
@@ -1189,6 +1230,7 @@ function sv(v) {
   document.getElementById('v-diagram').style.display = d ? 'block' : 'none';
   document.getElementById('v-explorer').style.display = d ? 'none' : 'block';
   document.getElementById('hero-wrap').style.display = d ? 'block' : 'none';
+  document.getElementById('exp-ctx').style.display = d ? 'none' : 'block';
   var bd = document.getElementById('btn-d');
   var be = document.getElementById('btn-e');
   bd.classList.toggle('on', d); bd.setAttribute('aria-pressed', d ? 'true' : 'false');
@@ -1215,7 +1257,13 @@ function sv(v) {
       document.querySelectorAll('.tb').forEach(function(x){ x.classList.remove('on'); x.setAttribute('aria-selected','false'); });
       document.querySelectorAll('.tpanel').forEach(function(x){ x.classList.remove('on'); });
       tbEl.classList.add('on'); tbEl.setAttribute('aria-selected','true');
-      document.getElementById(tid).classList.add('on');
+      var panel = document.getElementById(tid);
+      panel.classList.add('on');
+      /* Fix: IntersectionObserver won't fire for elements inside display:none panels.
+         Force .visible on all .fade-in elements when a panel becomes active. */
+      setTimeout(function() {
+        panel.querySelectorAll('.fade-in:not(.visible)').forEach(function(el){ el.classList.add('visible'); });
+      }, 60);
       document.getElementById('srch').value = '';
       doSearch('');
     }; })(id, tb);
