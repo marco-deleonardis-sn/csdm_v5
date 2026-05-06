@@ -123,7 +123,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .hero-in{position:relative;z-index:1}
 .eyebrow{font-family:var(--mono);font-size:var(--fs-label);font-weight:400;text-transform:uppercase;letter-spacing:.16em;color:var(--wg);margin-bottom:.875rem;display:flex;align-items:center;gap:8px}
 .eyebrow::before{content:'';display:block;width:28px;height:2px;background:var(--wg);animation:charge .5s ease forwards}
-[data-theme="light"] .eyebrow,[data-theme="light"] .eyebrow::before{color:var(--blue);background:var(--blue)}
+[data-theme="light"] .eyebrow{color:var(--text-m)}
+[data-theme="light"] .eyebrow::before{background:var(--blue)}
 .h1{font-size:var(--fs-h1);font-weight:900;line-height:.92;letter-spacing:-.03em;margin-bottom:.875rem;color:var(--text)}
 .h1 em{font-style:normal;background:linear-gradient(135deg,#63DF4E,#A8FF78,#63DF4E);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
 [data-theme="light"] .h1 em,[data-theme="a11y"] .h1 em{background:none;-webkit-text-fill-color:var(--wg);color:var(--wg)}
@@ -147,8 +148,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .chips-bar::-webkit-scrollbar{display:none}
 .chip{padding:0 10px;min-height:44px;border-radius:22px;border:1px solid var(--bord-s);background:var(--surf);color:var(--text-m);font-family:var(--mono);font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.08em;cursor:pointer;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0;transition:background .13s,border-color .13s,color .13s}
 .chip:hover{color:var(--text)}
-.chip.on{color:#032D42;font-weight:700;border-color:transparent}
-[data-theme="a11y"] .chip.on{color:#000}
+.chip.on{color:#fff;font-weight:700;border-color:transparent}
+[data-theme="light"] .chip.on{color:#032D42}
+[data-theme="a11y"] .chip.on{color:#fff;border-width:2px}
 .cdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 
 /* ── DIAGRAM ───────────────────────────────────────── */
@@ -171,8 +173,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .z-accent{position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px}
 .z-hd{display:flex;align-items:center;gap:7px;margin-bottom:9px}
 .z-ico{display:flex;align-items:center;justify-content:center;width:20px;height:20px;flex-shrink:0;color:inherit}
-.z-lbl{font-family:var(--mono);font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.13em;flex:1}
-.z-cnt{font-family:var(--mono);font-size:.58rem;color:var(--text-f);background:var(--surf);padding:2px 6px;border-radius:9px;border:1px solid var(--bord)}
+.z-lbl{font-family:var(--mono);font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.06em;flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;line-height:1.3}
+.z-cnt{font-family:var(--mono);font-size:.58rem;color:var(--text-f);background:var(--surf);padding:2px 7px;border-radius:9px;border:1px solid var(--bord);flex-shrink:0;white-space:nowrap}
 .z-personas{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:9px;padding-bottom:9px;border-bottom:1px solid var(--bord)}
 .prb{display:inline-flex;align-items:center;gap:5px;padding:0 9px;min-height:28px;border-radius:999px;font-family:var(--mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid;cursor:pointer;white-space:nowrap;background:none;transition:filter .13s}
 .prb:hover{filter:brightness(1.2)}
@@ -418,7 +420,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
     </div>
     <div class="hd-right">
       <!-- Theme toggles: icon-only, 36x36 -->
-      <!-- <div role="group" aria-label="Theme" style="display:flex;gap:3px">
+      <div role="group" aria-label="Theme" style="display:flex;gap:3px">
         <button class="icob on" id="t-dark" onclick="setTheme('dark')" aria-pressed="true" aria-label="Dark mode" title="Dark mode">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
         </button>
@@ -428,7 +430,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
         <button class="icob" id="t-a11y" onclick="setTheme('a11y')" aria-pressed="false" aria-label="High contrast / Accessibility" title="High contrast">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
         </button>
-      </div> -->
+      </div>
       <div class="sep" aria-hidden="true"></div>
       <!-- View toggles -->
       <div class="vtog" role="group" aria-label="View">
@@ -1014,7 +1016,7 @@ ENT.forEach(function(e) {
 });
 ZONES_LIST.forEach(function(z) {
   var el = document.getElementById('zcnt-' + z);
-  if (el && zCts[z]) el.textContent = zCts[z] + ' entities';
+  if (el && zCts[z]) { el.textContent = zCts[z]; el.setAttribute('title', zCts[z] + ' entities'); }
 });
 
 // ════════════════════════════════════════════════════
@@ -1073,7 +1075,14 @@ function setDom(k) {
     a.classList.add('on'); a.style.background = 'rgba(255,255,255,.1)'; a.setAttribute('aria-pressed', 'true');
   } else {
     var ch = document.getElementById('chip-' + activeDom);
-    if (ch) { ch.classList.add('on'); ch.style.background = DOM_CFG[activeDom].c; ch.style.color = '#032D42'; ch.style.borderColor = 'transparent'; ch.setAttribute('aria-pressed', 'true'); }
+    if (ch) {
+      var lt = document.documentElement.getAttribute('data-theme') === 'light';
+      ch.classList.add('on');
+      ch.style.background = DOM_CFG[activeDom].c;
+      ch.style.color = lt ? '#032D42' : '#fff';
+      ch.style.borderColor = 'transparent';
+      ch.setAttribute('aria-pressed', 'true');
+    }
   }
   document.querySelectorAll('.ec').forEach(function(c){ c.classList.toggle('dim', activeDom !== null && c.getAttribute('data-dm') !== activeDom); });
   ZONES_LIST.forEach(function(z){ var el = document.getElementById('zone-' + z); if (el) el.classList.toggle('dim', activeDom !== null && activeDom !== z); });
@@ -1091,8 +1100,8 @@ function resetChip() {
   if (nd) {
     var d = DOM_CFG[nd.dm];
     selChip.style.background = rgba(d.c, 0.13);
-    selChip.style.borderColor = rgba(d.c, 0.35);
-    selChip.style.color = d.c;
+    selChip.style.borderColor = rgba(d.c, 0.38);
+    selChip.style.color = 'var(--cc-' + nd.dm + ')';
     selChip.style.boxShadow = '';
     selChip.style.outline = '';
   }
@@ -1521,5 +1530,18 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { clo
 // Default: Explorer on mobile, Diagram on desktop
 if (window.innerWidth < 640) sv('e');
 </script>
+
+<footer style="background:var(--hd-bg);border-top:1px solid var(--bord);padding:1.25rem 20px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)" role="contentinfo">
+  <div style="max-width:72rem;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem">
+    <div style="display:flex;flex-direction:column;gap:.25rem">
+      <span style="font-size:var(--fs-body);font-weight:600;color:var(--text)">Marco De Leonardis</span>
+      <span style="font-family:var(--mono);font-size:var(--fs-label);color:var(--text-m);text-transform:uppercase;letter-spacing:.08em">Principal Architect &nbsp;·&nbsp; ServiceNow Impact Squad &nbsp;·&nbsp; AT&T Center of Excellence</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.25rem;text-align:right">
+      <span style="font-size:var(--fs-label);color:var(--text-m)">Based on CSDM 5 White Paper by Scott Lemm &amp; Rob Koeten &nbsp;·&nbsp; ServiceNow 2025</span>
+      <span style="font-family:var(--mono);font-size:var(--fs-label);color:var(--text-f);text-transform:uppercase;letter-spacing:.06em">&copy; 2025 ServiceNow, Inc. All rights reserved. &nbsp;·&nbsp; Confidential</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
