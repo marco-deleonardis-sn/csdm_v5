@@ -1,9 +1,5 @@
 /* ── FONTS ─────────────────────────────────────────── */
-@font-face{font-family:'ServiceNow Sans';src:url('https://www.servicenow.com/etc.clientlibs/ds/clientlibs/clientlib-arc-commons/resources/fonts/ServiceNowSans-Light.woff2') format('woff2');font-weight:300;font-display:swap}
-@font-face{font-family:'ServiceNow Sans';src:url('https://www.servicenow.com/etc.clientlibs/ds/clientlibs/clientlib-arc-commons/resources/fonts/ServiceNowSans-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
-@font-face{font-family:'ServiceNow Sans';src:url('https://www.servicenow.com/etc.clientlibs/ds/clientlibs/clientlib-arc-commons/resources/fonts/ServiceNowSans-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
-@font-face{font-family:'ServiceNow Sans';src:url('https://www.servicenow.com/etc.clientlibs/ds/clientlibs/clientlib-arc-commons/resources/fonts/ServiceNowSans-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
-@font-face{font-family:'ServiceNow Sans Mono';src:url('https://www.servicenow.com/etc.clientlibs/ds/clientlibs/clientlib-arc-commons/resources/fonts/ServiceNowSansMono-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+/* System font stack. Native typography on every OS, zero external loads. */
 
 /* ── TOKENS: DARK (default) ────────────────────────── */
 :root{
@@ -11,8 +7,8 @@
   --wg:#63DF4E;--blue:#52B8FF;--indigo:#7661FF;
   --err:#F87171;--warn:#FBBF24;--ok:#4ade80;
   --g4:#9CA3AF;--g5:#6B7280;
-  --font:'ServiceNow Sans',-apple-system,sans-serif;
-  --mono:'ServiceNow Sans Mono','Consolas',monospace;
+  --font:'Segoe UI',Roboto,system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Monaco,Consolas,monospace;
   --fs-body:clamp(1rem,1.5vw,1.0625rem);
   --fs-small:clamp(.8125rem,1.2vw,.875rem);
   --fs-label:.75rem;
@@ -388,7 +384,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .bs-body strong{font-weight:700;color:var(--text)}
 .bs-close{position:absolute;top:1.125rem;right:1.25rem;background:var(--surf);border:1px solid var(--bord-s);color:var(--text-m);min-width:34px;min-height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;cursor:pointer;transition:background .15s}
 .bs-close:hover{background:var(--surf-h);color:var(--text)}
-@media(min-width:861px){.bs-ov,.bs{display:none!important}}
 
 /* ── JOURNEY (Option B) ────────────────────────────── */
 .j-stepper{display:flex;align-items:stretch;gap:6px;margin-bottom:1.25rem}
