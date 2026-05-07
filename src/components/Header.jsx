@@ -21,9 +21,9 @@ function SNLogo() {
 }
 
 const THEME_BTNS = [
-  { key: 'dark',  title: 'Dark mode',                icon: '🌙' },
-  { key: 'light', title: 'Light mode',               icon: '☀️' },
-  { key: 'a11y',  title: 'High-contrast accessibility mode', icon: '♿' },
+  { key: 'dark',  title: 'Dark mode',                          icon: 'moon' },
+  { key: 'light', title: 'Light mode',                         icon: 'sun'  },
+  { key: 'a11y',  title: 'High-contrast accessibility mode',   icon: 'eye'  },
 ]
 
 export default function Header() {
@@ -47,12 +47,13 @@ export default function Header() {
               <button
                 key={key}
                 id={`t-${key}`}
-                className={`tb-t${state.theme === key ? ' on' : ''}`}
+                className={`icob${state.theme === key ? ' on' : ''}`}
                 onClick={() => actions.setTheme(key)}
                 aria-pressed={state.theme === key}
+                aria-label={title}
                 title={title}
               >
-                {icon}
+                <Icon name={icon} size={14} />
               </button>
             ))}
           </div>
