@@ -41,6 +41,17 @@ export default function Header() {
         </div>
 
         <div className="hd-right">
+          {/* White paper download */}
+           <a className="dl-btn"
+            href={`${import.meta.env.BASE_URL}csdm5-whitepaper.pdf`}
+            download="CSDM5-WhitePaper.pdf"
+            aria-label="Download CSDM 5 white paper PDF"
+            title="Download CSDM 5 white paper"
+          >
+            <Icon name="download" size={13} />
+            <span className="dl-btn-lbl">White Paper</span>
+          </a>
+
           {/* Theme toggles */}
           <div className="theme-tog" role="group" aria-label="Theme">
             {THEME_BTNS.map(({ key, title, icon }) => (
