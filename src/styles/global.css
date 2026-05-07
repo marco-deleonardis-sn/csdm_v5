@@ -67,6 +67,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .hd-title em{font-style:normal;background:linear-gradient(135deg,#63DF4E,#A8FF78,#63DF4E);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
 [data-theme="light"] .hd-title em,[data-theme="a11y"] .hd-title em{background:none;-webkit-text-fill-color:var(--wg);color:var(--wg)}
 .hd-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+
+/* White paper download button */
+.dl-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:0 13px;height:36px;
+  font-family:var(--font);font-size:var(--fs-label);font-weight:600;
+  color:var(--text-m);background:var(--surf);
+  border:1px solid var(--bord-s);border-radius:8px;
+  text-decoration:none;white-space:nowrap;cursor:pointer;
+  transition:background .13s,color .13s,border-color .13s
+}
+.dl-btn:hover{background:var(--surf-h);color:var(--text);border-color:var(--wg)}
+[data-theme="light"] .dl-btn:hover{border-color:var(--blue)}
+@media(max-width:680px){.dl-btn-lbl{display:none}}
 .sep{width:1px;height:22px;background:var(--bord-s)}
 
 /* Icon button base — 36x36 square, icon only */
