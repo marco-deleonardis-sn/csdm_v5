@@ -47,8 +47,8 @@ function Hero() {
               <div
                 className="lc-pill"
                 style={{
-                  borderColor: color.replace(')', ', .4)').replace('var(', 'var(') + '',
-                  background: color.replace(')', ', .1)').replace('var(', 'var(') + '',
+                  borderColor: `color-mix(in srgb, ${color} 40%, transparent)`,
+                  background: `color-mix(in srgb, ${color} 10%, transparent)`,
                   color,
                 }}
                 tabIndex={0}

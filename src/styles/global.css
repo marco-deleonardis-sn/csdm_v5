@@ -120,6 +120,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .kpi{background:var(--surf);border:1px solid var(--bord);border-radius:1rem;padding:.875rem 1.125rem;text-align:center}
 .kpi-v{font-size:clamp(1.5rem,4vw,2.25rem);font-weight:700;line-height:1;margin-bottom:.25rem}
 .kpi-l{font-family:var(--mono);font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.08em;color:var(--text-m)}
+.hero-inner{position:relative;z-index:1}
+.kpi-banner{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;max-width:580px;margin-top:1.25rem;margin-bottom:.5rem}
+@media(min-width:480px){.kpi-banner{grid-template-columns:repeat(4,1fr)}}
+.kpi-item{display:flex;flex-direction:column;align-items:flex-start}
+.kpi-val{font-size:clamp(1.5rem,4vw,2.25rem);font-weight:700;line-height:1;margin-bottom:.25rem}
+.kpi-lbl{font-family:var(--mono);font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.08em;color:var(--text-m)}
 
 /* Lifecycle strip */
 .lc-strip{display:flex;align-items:center;overflow-x:auto;scrollbar-width:none;margin-top:1.25rem;gap:0}
@@ -336,8 +342,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .ai-callout.green{background:rgba(99,223,78,.06);border:1px solid rgba(99,223,78,.2)}
 
 /* ── FADE-IN ────────────────────────────────────────── */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease}
-.fade-in.vis{opacity:1;transform:none}
+.fade-in{animation:rise .45s ease both}
+@media (prefers-reduced-motion: reduce){.fade-in{animation:none}}
 
 /* ── DETAIL PANEL ──────────────────────────────────── */
 .dp-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:490;opacity:0;pointer-events:none;transition:opacity .22s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
@@ -482,3 +488,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
   .eyebrow::before,.sec-hd::before{animation:none;width:18px;opacity:1}
   .hero-grd{display:none}
 }
+/* ── FOOTER ──────────────────────────────────────────── */
+.app-footer{padding:2rem 1.5rem 3rem;border-top:1px solid var(--bord);margin-top:3rem;text-align:center}
+.footer-author{font-size:var(--fs-small);font-weight:500;color:var(--text);margin-bottom:.5rem}
+.footer-source{font-family:var(--mono);font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.08em;color:var(--text-m);margin-bottom:1rem}
+.footer-legal{font-size:.6875rem;color:var(--text-f);max-width:840px;margin:0 auto;line-height:1.5}
