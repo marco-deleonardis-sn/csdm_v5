@@ -270,10 +270,10 @@ export default function DiagramView() {
       <div className="view-wrap" id="v-diagram">
         <div className="dg-scroll">
           <div className="dg" id="dg" role="region" aria-label="CSDM 5 conceptual diagram">
-            <DomainZone domKey="portfolio" />
-            <DomainZone domKey="ideation" />
             <DomainZone domKey="build" />
             <DomainZone domKey="design" />
+            <DomainZone domKey="portfolio" />
+            <DomainZone domKey="ideation" />
             <DomainZone domKey="delivery" />
             <DomainZone domKey="consumption" />
             <DomainZone domKey="foundation" />

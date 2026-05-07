@@ -140,32 +140,47 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 .cdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 
 /* ── DIAGRAM ───────────────────────────────────────── */
-.dg-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.dg-wrap::-webkit-scrollbar{height:4px;background:var(--surf)}
-.dg-wrap::-webkit-scrollbar-thumb{background:var(--bord-s);border-radius:2px}
-.diag-wrap{padding:16px 20px 28px}
-.dg{display:flex;flex-direction:column;gap:10px}
-@media(min-width:820px){
-  .dg{display:grid;gap:10px;min-width:820px;
-    grid-template-areas:". mp mp ideation" "build design design ideation" "delivery delivery consumption consumption" "found found found found";
-    grid-template-columns:1.1fr 1fr 1fr 1.05fr;grid-template-rows:auto auto auto auto}
-  .z-mp{grid-area:mp}.z-ideation{grid-area:ideation}.z-build{grid-area:build}.z-design{grid-area:design}
-  .z-delivery{grid-area:delivery}.z-consumption{grid-area:consumption}.z-foundation{grid-area:found}
+.view-wrap{padding:20px 24px 48px;max-width:1320px;margin:0 auto}
+.dg-scroll{width:100%}
+/* Diagram grid layout — matches CSDM 5 conceptual model
+   Left column: Build (top), Service Delivery (spans 2 rows, dominant)
+   Middle column: Manage Portfolio (the hub, vertical spine)
+   Right column: Design, Ideation, Consumption (stacked)
+   Foundation: full-width data layer at the bottom */
+.dg{display:flex;flex-direction:column;gap:12px}
+@media(min-width:920px){
+  .dg{
+    display:grid;
+    gap:14px;
+    grid-template-areas:
+      "build       portfolio   design"
+      "delivery    portfolio   ideation"
+      "delivery    portfolio   consumption"
+      "foundation  foundation  foundation";
+    grid-template-columns: minmax(0, 1.5fr) minmax(200px, 280px) minmax(0, 1.15fr);
+  }
+  .zone-build       {grid-area: build}
+  .zone-design      {grid-area: design}
+  .zone-portfolio   {grid-area: portfolio; display: flex; flex-direction: column; justify-content: center}
+  .zone-ideation    {grid-area: ideation}
+  .zone-delivery    {grid-area: delivery}
+  .zone-consumption {grid-area: consumption}
+  .zone-foundation  {grid-area: foundation}
 }
 
 /* Zone glass cards */
 .zone{border-radius:1.25rem;padding:1rem 1.125rem;border:1px solid var(--bord);background:var(--surf);position:relative;overflow:hidden;transition:opacity .18s}
 .zone.dim{opacity:.1;pointer-events:none}
-.z-accent{position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px}
+.zone-accent{position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px}
 .z-hd{display:flex;align-items:center;gap:7px;margin-bottom:9px}
-.z-ico{display:flex;align-items:center;justify-content:center;width:20px;height:20px;flex-shrink:0;color:inherit}
+.z-icon{display:flex;align-items:center;justify-content:center;width:20px;height:20px;flex-shrink:0;color:inherit}
 .z-lbl{font-family:var(--mono);font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.06em;flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;line-height:1.3}
 .z-cnt{font-family:var(--mono);font-size:.58rem;color:var(--text-f);background:var(--surf);padding:2px 7px;border-radius:9px;border:1px solid var(--bord);flex-shrink:0;white-space:nowrap}
 .z-personas{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:9px;padding-bottom:9px;border-bottom:1px solid var(--bord)}
 .prb{display:inline-flex;align-items:center;gap:5px;padding:0 9px;min-height:28px;border-radius:999px;font-family:var(--mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.06em;border:1px solid;cursor:pointer;white-space:nowrap;background:none;transition:filter .13s}
 .prb:hover{filter:brightness(1.2)}
 [data-theme="a11y"] .prb{border-width:2px;font-weight:700}
-.z-tier-lbl{font-family:var(--mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.09em;color:var(--text-f);margin-bottom:5px}
+.zone-tier-lbl{font-family:var(--mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.09em;color:var(--text-f);margin-bottom:5px}
 
 /* Entity chips */
 .ents{display:flex;flex-wrap:wrap;gap:5px}
@@ -209,13 +224,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);font-weight:
 
 /* Inner boxes */
 .inner-box{border:1px dashed var(--bord-s);border-radius:8px;padding:6px 8px;margin-bottom:7px}
-.inner-lbl{font-family:var(--mono);font-size:.58rem;font-style:italic;color:var(--text-f);margin-bottom:5px}
+.inner-box-lbl,.cat-box-lbl{font-family:var(--mono);font-size:.58rem;font-style:italic;color:var(--text-f);margin-bottom:5px}
 .cat-box{border:1px solid var(--bord);border-radius:8px;padding:6px 8px;margin-top:8px;background:var(--surf)}
 
 /* Two-column delivery inner */
-@media(min-width:480px){.dlv-inner{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}}
-.dlv-tier{margin-bottom:9px}
-.dlv-net{margin-top:9px;padding-top:9px;border-top:1px solid var(--bord)}
+@media(min-width:480px){.delivery-inner{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}}
+.delivery-tier{margin-bottom:9px}
+.delivery-net{margin-top:9px;padding-top:9px;border-top:1px solid var(--bord)}
 
 /* Legend */
 .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;padding:0 2px}
